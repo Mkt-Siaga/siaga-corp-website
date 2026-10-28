@@ -187,11 +187,26 @@ a.marca:hover .marca__ir { color: var(--laranja); }
 .aceite { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; line-height: 1.45; cursor: pointer; }
 .aceite input { margin-top: .2em; accent-color: var(--laranja); }
 .form-contato .btn { width: 100%; justify-content: center; margin-top: 20px; cursor: pointer; font-family: inherit; }
-.form-contato__nota { margin: 12px 0 0; font-size: .8rem; text-align: center; }
+.verifica { display: grid; grid-template-columns: auto 1fr 88px; align-items: center; gap: 12px; margin-top: 16px; padding: 12px 14px; border: 1px solid rgba(247, 166, 0, .35); border-radius: 8px; background: rgba(247, 166, 0, .06); }
+.verifica__icone { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--laranja); color: var(--laranja); font-size: .85rem; font-weight: 700; }
+.verifica label { font-size: .9rem; color: var(--texto-2); }
+.verifica b { color: var(--texto); font-weight: 600; white-space: nowrap; }
+.verifica input { width: 100%; padding: .6em .7em; border: 1px solid rgba(255, 255, 255, .16); border-radius: 8px; background: #0b0b0b; color: var(--texto); font: inherit; text-align: center; }
+.verifica input:focus { outline: none; border-color: var(--laranja); box-shadow: 0 0 0 3px rgba(247, 166, 0, .2); }
+.form-contato__erro { margin: 14px 0 0; padding: 12px 14px; border-left: 3px solid #ff6b6b; border-radius: 6px; background: rgba(255, 107, 107, .08); font-size: .9rem; color: #f2c4c4; }
+.form-contato__erro a { color: var(--laranja); }
+.form-contato__ok { display: grid; justify-items: center; gap: 6px; padding: 28px 8px; text-align: center; outline: none; animation: ok-entra .7s var(--ease) both; }
+.form-contato__ok h3 { font-size: 1.7rem; margin: 10px 0 0; }
+.form-contato__ok p { max-width: 34ch; margin: 0 0 14px; }
+.form-contato__ok small { color: var(--texto-2); font-size: .8rem; }
+.form-contato__selo { position: relative; width: 76px; height: 76px; border-radius: 50%; border: 2px solid var(--laranja); box-shadow: 0 0 0 8px rgba(247, 166, 0, .08); animation: ok-selo .6s cubic-bezier(.34, 1.56, .64, 1) .1s both; }
+.form-contato__selo::after { content: ""; position: absolute; left: 27px; top: 14px; width: 20px; height: 34px; border-right: 3px solid var(--laranja); border-bottom: 3px solid var(--laranja); transform: rotate(45deg); transform-origin: center; animation: ok-check .4s ease .5s both; }
+@keyframes ok-entra { from { opacity: 0; transform: translateY(16px); } }
+@keyframes ok-selo { from { transform: scale(.3); opacity: 0; } }
+@keyframes ok-check { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
 .form-contato .btn:disabled { cursor: progress; opacity: .75; }
 .form-contato.enviando .btn { animation: enviando 1.2s ease-in-out infinite; }
 @keyframes enviando { 50% { opacity: .5; } }
-.form-contato__ok p { margin: 0; }
 .pote { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 [hidden] { display: none !important; }
 

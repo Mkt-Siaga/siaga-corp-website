@@ -197,15 +197,14 @@
       </ul>
     </div>
 
-    <!-- Site estático: o envio passa pelo FormSubmit, que manda a mensagem para o e-mail do action e exige o reCAPTCHA antes de entregar.
-         No primeiro envio, o FormSubmit manda um e-mail de ativação para operacoes@gruposiaga.com: alguém precisa clicar em "Activate Form". -->
+    <!-- Site estático: o envio vai em segundo plano para o FormSubmit (endpoint /ajax/), que repassa a mensagem ao e-mail do action.
+         O visitante nunca sai do site. Proteção contra robôs: conta de verificação no formulário + campo-isca (_honey).
+         Se operacoes@ trocar, o FormSubmit pede nova ativação: clicar em "Activate Form" no e-mail que ele manda. -->
     <div class="form-contato">
-      <form id="formContato" action="https://formsubmit.co/operacoes@gruposiaga.com" method="POST">
+      <form id="formContato" action="https://formsubmit.co/operacoes@gruposiaga.com" method="POST" novalidate>
         <h3>Envie sua mensagem</h3>
         <input type="hidden" name="_subject" value="Contato pelo site · Grupo Siaga">
-        <input type="hidden" name="_captcha" value="true">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" id="formNext" value="">
         <input type="text" name="_honey" class="pote" tabindex="-1" autocomplete="off" aria-hidden="true">
 
         <div class="campo"><label for="fInteresse">Assunto</label>
@@ -225,13 +224,21 @@
           <div class="campo"><label for="fFone">Telefone / WhatsApp</label><input id="fFone" name="Telefone" type="tel" autocomplete="tel"></div>
         </div>
         <div class="campo"><label for="fMsg">Mensagem</label><textarea id="fMsg" name="Mensagem" rows="4" required></textarea></div>
+        <div class="verifica">
+          <span class="verifica__icone" aria-hidden="true">✓</span>
+          <label for="fConta">Verificação: quanto é <b id="contaTxt">2 + 3</b>?</label>
+          <input id="fConta" inputmode="numeric" autocomplete="off" maxlength="3" required>
+        </div>
         <label class="aceite"><input type="checkbox" name="Aceite" value="Sim" required> Autorizo o Grupo Siaga a entrar em contato sobre esta solicitação.</label>
         <button class="btn" type="submit">Enviar mensagem <span aria-hidden="true">→</span></button>
-        <p class="form-contato__nota">Ao enviar, uma verificação reCAPTCHA confirma que você não é um robô.</p>
+        <p class="form-contato__erro" id="formErro" role="alert" hidden></p>
       </form>
-      <div class="form-contato__ok" id="formOk" role="status" hidden>
+      <div class="form-contato__ok" id="formOk" role="status" tabindex="-1" hidden>
+        <span class="form-contato__selo" aria-hidden="true"></span>
         <h3>Mensagem enviada</h3>
-        <p>Obrigado pelo contato. Nossa equipe responde em breve.</p>
+        <p>Obrigado pelo contato. Nossa equipe responde em breve pelo e-mail ou telefone informado.</p>
+        <a class="btn btn--linha" href="#inicio" id="formVoltar">Voltar ao início</a>
+        <small id="formConta"></small>
       </div>
     </div>
   </div>

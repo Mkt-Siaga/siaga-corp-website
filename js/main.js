@@ -72,31 +72,64 @@
   $('telefone').textContent = C.telefone; $('telefone').href = C.telefoneLink;
   $('email').textContent = C.email; $('email').href = 'mailto:' + C.email;
 
-  // Formulário de contato: os botões do hero já escolhem o assunto; depois do reCAPTCHA o FormSubmit volta com ?enviado=1
-  var form = $('formContato');
+  // Formulário de contato: os botões do hero já escolhem o assunto
+  var form = $('formContato'), enviar = form.querySelector('button[type=submit]'), rotuloEnviar = enviar.innerHTML;
   document.querySelectorAll('.hero [data-assunto]').forEach(function (a) {
     a.addEventListener('click', function () { $('fInteresse').value = a.dataset.assunto; });
   });
-  $('formNext').value = location.href.split(/[?#]/)[0] + '?enviado=1#contato';
-  // O FormSubmit demora alguns segundos para abrir o reCAPTCHA: sem esse aviso parece que o botão não fez nada
-  form.addEventListener('submit', function () {
-    var enviar = form.querySelector('button[type=submit]');
-    enviar.disabled = true;
-    enviar.innerHTML = 'Enviando…';
-    form.classList.add('enviando');
-  });
-  window.addEventListener('pageshow', function (e) {
-    // Ao voltar do FormSubmit pelo botão "voltar", o navegador restaura a página com o botão ainda travado
-    if (!e.persisted) return;
-    var enviar = form.querySelector('button[type=submit]');
-    enviar.disabled = false;
-    enviar.innerHTML = 'Enviar mensagem <span aria-hidden="true">→</span>';
-    form.classList.remove('enviando');
-  });
-  if (/[?&]enviado=1/.test(location.search)) {
-    form.hidden = true; $('formOk').hidden = false;
-    history.replaceState(null, '', location.pathname + '#contato');
+
+  // Verificação anti-robô: uma conta simples, sorteada a cada carregamento
+  var soma;
+  function novaConta() {
+    var x = 2 + Math.floor(Math.random() * 8), y = 1 + Math.floor(Math.random() * 9);
+    soma = x + y; $('contaTxt').textContent = x + ' + ' + y; $('fConta').value = '';
   }
+  novaConta();
+  $('fConta').addEventListener('input', function () { this.setCustomValidity(''); });
+
+  function travar(sim) {
+    enviar.disabled = sim;
+    enviar.innerHTML = sim ? 'Enviando…' : rotuloEnviar;
+    form.classList.toggle('enviando', sim);
+  }
+  function erro(texto) {
+    $('formErro').innerHTML = texto; $('formErro').hidden = false; travar(false);
+  }
+  var volta;
+  function sucesso() {
+    form.hidden = true; $('formOk').hidden = false; $('formOk').focus({ preventScroll: true });
+    // Mostra a confirmação e volta para o início sozinho; o formulário fica pronto para outro envio
+    var s = 8;
+    (function contar() {
+      $('formConta').textContent = 'Voltando ao início em ' + s + ' s';
+      if (s-- > 0) volta = setTimeout(contar, 1000); else voltar();
+    })();
+  }
+  function voltar() {
+    clearTimeout(volta);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(function () { form.reset(); novaConta(); travar(false); form.hidden = false; $('formOk').hidden = true; }, 900);
+  }
+  $('formVoltar').addEventListener('click', function (e) { e.preventDefault(); voltar(); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    $('formErro').hidden = true;
+    $('fConta').setCustomValidity(+$('fConta').value.trim() === soma ? '' : 'Resposta incorreta. Confira a conta.');
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    if (form._honey.value) { sucesso(); return; } // robô preencheu o campo-isca: finge que enviou
+    travar(true);
+    // Endpoint /ajax/ do FormSubmit: responde em JSON e não tira o visitante do site
+    fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (String(res.success) === 'true') sucesso();
+        else throw new Error(res.message);
+      })
+      .catch(function () {
+        erro('Não foi possível enviar agora. Tente de novo em instantes ou fale com a gente: <a href="mailto:' + C.email + '">' + C.email + '</a> · <a href="' + C.telefoneLink + '">' + esc(C.telefone) + '</a>');
+      });
+  });
   $('redes').innerHTML = C.redes.map(function (r) { return '<a href="' + r.url + '" target="_blank" rel="noopener">' + esc(r.nome) + '</a>'; }).join('');
   $('ano').textContent = new Date().getFullYear();
 
