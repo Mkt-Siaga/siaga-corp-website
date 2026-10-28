@@ -5,6 +5,8 @@ window.SIAGA = {
     telefone: '+55 11 99408-4004',
     telefoneLink: 'tel:+5511994084004',
     email: 'operacoes@gruposiaga.com',
+    // Chave pública do Web3Forms (web3forms.com, gerada para operacoes@). Vazia = o formulário usa o FormSubmit.
+    formChave: '',
     redes: [
       { nome: 'LinkedIn', url: 'https://www.linkedin.com/company/gruposiaga' },
       { nome: 'Instagram', url: 'https://www.instagram.com/gruposiaga/' },

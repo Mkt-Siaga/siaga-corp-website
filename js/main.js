@@ -119,14 +119,26 @@
     if (!form.checkValidity()) { form.reportValidity(); return; }
     if (form._honey.value) { sucesso(); return; } // robô preencheu o campo-isca: finge que enviou
     travar(true);
-    // Endpoint /ajax/ do FormSubmit: responde em JSON e não tira o visitante do site
-    fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
+    // Com chave, envia pelo Web3Forms (responde em ~1 s); sem chave, pelo endpoint /ajax/ do FormSubmit. Os dois respondem em JSON
+    // e não tiram o visitante do site. O FormSubmit sem ativação chega a levar mais de 1 minuto, daí o limite de 20 s.
+    var dados = new FormData(form), url = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+    if (C.formChave) {
+      url = 'https://api.web3forms.com/submit';
+      dados.append('access_key', C.formChave);
+      dados.append('subject', dados.get('_subject'));
+      dados.append('from_name', 'Site Siaga Corp');
+    }
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var limite = setTimeout(function () { if (ctrl) ctrl.abort(); }, 20000);
+    fetch(url, { method: 'POST', headers: { Accept: 'application/json' }, body: dados, signal: ctrl ? ctrl.signal : undefined })
       .then(function (r) { return r.json(); })
       .then(function (res) {
+        clearTimeout(limite);
         if (String(res.success) === 'true') sucesso();
         else throw new Error(res.message);
       })
       .catch(function () {
+        clearTimeout(limite);
         erro('Não foi possível enviar agora. Tente de novo em instantes ou fale com a gente: <a href="mailto:' + C.email + '">' + C.email + '</a> · <a href="' + C.telefoneLink + '">' + esc(C.telefone) + '</a>');
       });
   });
