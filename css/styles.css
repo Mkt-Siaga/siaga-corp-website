@@ -167,13 +167,30 @@ a.marca:hover .marca__ir { color: var(--laranja); }
 
 /* CTA / contato */
 .cta { padding: clamp(72px, 10vw, 120px) 0; background: linear-gradient(90deg, rgba(5, 5, 5, .96) 30%, rgba(5, 5, 5, .7)), url(../assets/img/navio.webp) right center/cover; border-top: 1px solid var(--linha); }
-.cta__in { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+.cta__in { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
 .cta h2 { max-width: 18ch; }
-.contatos { display: grid; gap: 14px; }
+.contatos { display: grid; gap: 14px; margin-top: 2rem; }
 .contatos li { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; border-radius: var(--raio); border: 1px solid var(--linha); background: rgba(17, 17, 17, .85); }
 .contatos small { display: block; color: var(--texto-2); font-size: .78rem; text-transform: uppercase; letter-spacing: .12em; }
 .contatos a { text-decoration: none; font-weight: 500; }
 .contatos a:hover { color: var(--laranja); }
+
+/* Formulário de contato (envio via FormSubmit + reCAPTCHA) */
+.form-contato { padding: clamp(24px, 4vw, 36px); border: 1px solid var(--linha); border-top: 3px solid var(--laranja); border-radius: var(--raio); background: rgba(10, 10, 10, .92); backdrop-filter: blur(6px); }
+.form-contato h3 { font-size: 1.4rem; margin-bottom: .2em; }
+.campo { display: grid; gap: 6px; margin-top: 14px; }
+.campo label, .aceite { font-size: .85rem; font-weight: 500; color: var(--texto-2); }
+.campo input, .campo select, .campo textarea { width: 100%; padding: .75em .9em; border: 1px solid rgba(255, 255, 255, .16); border-radius: 8px; background: #0b0b0b; color: var(--texto); font: inherit; font-size: .95rem; }
+.campo textarea { resize: vertical; }
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--laranja); box-shadow: 0 0 0 3px rgba(247, 166, 0, .2); }
+.duplo { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+.aceite { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; line-height: 1.45; cursor: pointer; }
+.aceite input { margin-top: .2em; accent-color: var(--laranja); }
+.form-contato .btn { width: 100%; justify-content: center; margin-top: 20px; cursor: pointer; font-family: inherit; }
+.form-contato__nota { margin: 12px 0 0; font-size: .8rem; text-align: center; }
+.form-contato__ok p { margin: 0; }
+.pote { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+[hidden] { display: none !important; }
 
 /* Rodapé */
 .rodape { padding: 36px 0; border-top: 1px solid var(--linha); }
@@ -261,6 +278,7 @@ a.marca:hover .marca__ir { color: var(--laranja); }
   .grupo-foto img { margin: 0 auto; }
 }
 @media (max-width: 620px) {
+  .duplo { grid-template-columns: 1fr; }
   body { font-size: 16px; }
   .topo__logo img { width: 140px; }
   .hero__ctas .btn { width: 100%; justify-content: center; }

@@ -69,12 +69,19 @@
 
   // Contato
   var C = D.contato;
-  var mailto = function (assunto) { return 'mailto:' + C.email + '?subject=' + encodeURIComponent(assunto); };
   $('telefone').textContent = C.telefone; $('telefone').href = C.telefoneLink;
   $('email').textContent = C.email; $('email').href = 'mailto:' + C.email;
-  $('ctaMarca').href = mailto('Quero desenvolver marca própria');
-  $('ctaImportar').href = mailto('Quero importar com minha marca');
-  document.querySelectorAll('.hero [data-assunto]').forEach(function (a) { a.href = mailto(a.dataset.assunto); });
+
+  // Formulário de contato: os botões do hero já escolhem o assunto; depois do reCAPTCHA o FormSubmit volta com ?enviado=1
+  var form = $('formContato');
+  document.querySelectorAll('.hero [data-assunto]').forEach(function (a) {
+    a.addEventListener('click', function () { $('fInteresse').value = a.dataset.assunto; });
+  });
+  $('formNext').value = location.href.split(/[?#]/)[0] + '?enviado=1#contato';
+  if (/[?&]enviado=1/.test(location.search)) {
+    form.hidden = true; $('formOk').hidden = false;
+    history.replaceState(null, '', location.pathname + '#contato');
+  }
   $('redes').innerHTML = C.redes.map(function (r) { return '<a href="' + r.url + '" target="_blank" rel="noopener">' + esc(r.nome) + '</a>'; }).join('');
   $('ano').textContent = new Date().getFullYear();
 
@@ -168,7 +175,8 @@
     marcar('.tags li', 'escala', 80);
     marcar('.escritorio', 'escala', 110);
     marcar('.vantagens li', 'esq', 60);
-    marcar('.contatos li', 'dir', 120);
+    marcar('.contatos li', 'sobe', 110);
+    marcar('.form-contato', 'dir');
     marcar('.grupo-foto', 'cortina');
     marcar('.grupo-foto__card', 'dir', 450);
     document.querySelectorAll('.contador').forEach(function (el) { el.textContent = '0'; alvos.push(el); });

@@ -4,7 +4,7 @@ window.SIAGA = {
   contato: {
     telefone: '+55 11 99408-4004',
     telefoneLink: 'tel:+5511994084004',
-    email: 'contato@gruposiaga.com',
+    email: 'operacoes@gruposiaga.com',
     redes: [
       { nome: 'LinkedIn', url: 'https://www.linkedin.com/company/gruposiaga' },
       { nome: 'Instagram', url: 'https://www.instagram.com/gruposiaga/' },

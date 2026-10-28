@@ -190,16 +190,50 @@
       <p class="olho">Contato</p>
       <h2>Pronto para elevar o nível do seu portfólio?</h2>
       <p>Fale com nossos especialistas e descubra como importar com segurança, reduzir custos e desenvolver produtos com alta competitividade.</p>
-      <div class="hero__ctas">
-        <a class="btn" id="ctaMarca" href="#">Quero desenvolver marca própria <span aria-hidden="true">→</span></a>
-        <a class="btn btn--linha" id="ctaImportar" href="#">Quero importar com minha marca <span aria-hidden="true">→</span></a>
+      <ul class="contatos">
+        <li><img src="assets/icones/icn-telefone.svg" alt="" width="24" height="24"><span><small>Telefone</small><a id="telefone" href="#"></a></span></li>
+        <li><img src="assets/icones/icn-mail.svg" alt="" width="24" height="24"><span><small>E-mail</small><a id="email" href="#"></a></span></li>
+        <li><img src="assets/icones/icn-localizacao.svg" alt="" width="24" height="24"><span><small>Sede</small>R. Surubim, 577, Conj. 121, Brooklin, São Paulo/SP</span></li>
+      </ul>
+    </div>
+
+    <!-- Site estático: o envio passa pelo FormSubmit, que manda a mensagem para o e-mail do action e exige o reCAPTCHA antes de entregar.
+         No primeiro envio, o FormSubmit manda um e-mail de ativação para operacoes@gruposiaga.com: alguém precisa clicar em "Activate Form". -->
+    <div class="form-contato">
+      <form id="formContato" action="https://formsubmit.co/operacoes@gruposiaga.com" method="POST">
+        <h3>Envie sua mensagem</h3>
+        <input type="hidden" name="_subject" value="Contato pelo site · Grupo Siaga">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" id="formNext" value="">
+        <input type="text" name="_honey" class="pote" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="campo"><label for="fInteresse">Assunto</label>
+          <select id="fInteresse" name="Assunto">
+            <option>Quero desenvolver marca própria</option>
+            <option>Quero importar com minha marca</option>
+            <option>Quero conhecer as marcas do grupo</option>
+            <option>Outro assunto</option>
+          </select>
+        </div>
+        <div class="duplo">
+          <div class="campo"><label for="fNome">Nome</label><input id="fNome" name="Nome" autocomplete="name" required></div>
+          <div class="campo"><label for="fEmpresa">Empresa</label><input id="fEmpresa" name="Empresa" autocomplete="organization" required></div>
+        </div>
+        <div class="duplo">
+          <div class="campo"><label for="fEmail">E-mail</label><input id="fEmail" name="email" type="email" autocomplete="email" required></div>
+          <div class="campo"><label for="fFone">Telefone / WhatsApp</label><input id="fFone" name="Telefone" type="tel" autocomplete="tel"></div>
+        </div>
+        <div class="campo"><label for="fMsg">Mensagem</label><textarea id="fMsg" name="Mensagem" rows="4" required></textarea></div>
+        <label class="aceite"><input type="checkbox" name="Aceite" value="Sim" required> Autorizo o Grupo Siaga a entrar em contato sobre esta solicitação.</label>
+        <button class="btn" type="submit">Enviar mensagem <span aria-hidden="true">→</span></button>
+        <p class="form-contato__nota">Ao enviar, uma verificação reCAPTCHA confirma que você não é um robô.</p>
+      </form>
+      <div class="form-contato__ok" id="formOk" role="status" hidden>
+        <h3>Mensagem enviada</h3>
+        <p>Obrigado pelo contato. Nossa equipe responde em breve.</p>
       </div>
     </div>
-    <ul class="contatos">
-      <li><img src="assets/icones/icn-telefone.svg" alt="" width="24" height="24"><span><small>Telefone</small><a id="telefone" href="#"></a></span></li>
-      <li><img src="assets/icones/icn-mail.svg" alt="" width="24" height="24"><span><small>E-mail</small><a id="email" href="#"></a></span></li>
-      <li><img src="assets/icones/icn-localizacao.svg" alt="" width="24" height="24"><span><small>Sede</small>R. Surubim, 577, Conj. 121, Brooklin, São Paulo/SP</span></li>
-    </ul>
   </div>
 </section>
 
