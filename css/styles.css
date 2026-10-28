@@ -107,7 +107,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 /* Diferenciais */
 .difs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .dif { overflow: hidden; border-radius: var(--raio); background: var(--preto); border: 1px solid var(--linha); }
-.dif img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; filter: saturate(.85); transition: transform .5s; }
+/* Tom quente: as fotos originais são azuladas; sepia neutraliza o azul e o hue-rotate puxa para o âmbar da marca */
+.dif img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; filter: sepia(1) saturate(1.35) hue-rotate(-16deg) contrast(1.1) brightness(.82); transition: transform .5s; }
 .dif:hover img { transform: scale(1.04); }
 .dif div { padding: 22px 24px 26px; }
 .dif p { margin: 0; font-size: .95rem; }
