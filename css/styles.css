@@ -17,7 +17,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: var(--topo-alt); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body { margin: 0; background: var(--preto); color: var(--texto); font: 400 17px/1.6 var(--fonte); -webkit-font-smoothing: antialiased; }
+body { margin: 0; overflow-x: clip; background: var(--preto); color: var(--texto); font: 400 17px/1.6 var(--fonte); -webkit-font-smoothing: antialiased; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
 h1, h2, h3 { line-height: 1.12; margin: 0 0 .5em; font-weight: 600; letter-spacing: -.01em; }
@@ -184,9 +184,61 @@ a.marca:hover .marca__ir { color: var(--laranja); }
 .rodape__redes a:hover { color: var(--laranja); }
 .rodape p { margin: 0; font-size: .85rem; }
 
-/* Entrada suave */
-.surge { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
-.surge.visivel { opacity: 1; transform: none; }
+/* Animações de entrada. Tudo fica sob .anima (posta no <head> só sem prefers-reduced-motion): sem JS ou com movimento reduzido, nada some. */
+:root { --ease: cubic-bezier(.16, 1, .3, 1); }
+.progresso { position: fixed; inset: 0 0 auto; z-index: 60; height: 3px; background: linear-gradient(90deg, var(--laranja-escuro), var(--laranja)); transform: scaleX(0); transform-origin: left; pointer-events: none; }
+
+/* Tela de carregamento: logo se revela da esquerda, barra laranja enche, a tela sobe como cortina */
+.carregando { display: none; }
+.anima .carregando { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: var(--preto); clip-path: inset(0); animation: carregar-fim .5s ease 4s forwards; }
+.carregando__in { display: grid; justify-items: center; gap: 24px; }
+.carregando img { width: 200px; animation: carregar-logo 1.1s var(--ease) both; }
+.carregando__barra { width: 200px; height: 2px; overflow: hidden; background: var(--linha); }
+.carregando__barra::after { content: ''; display: block; height: 100%; background: var(--laranja); transform-origin: left; animation: carregar-barra 1.2s var(--ease) .1s both; }
+.anima.entrou .carregando { clip-path: inset(0 0 100% 0); transition: clip-path .9s cubic-bezier(.7, 0, .2, 1); }
+@keyframes carregar-logo { from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateX(-12px); } to { clip-path: inset(0); } }
+@keyframes carregar-barra { from { transform: scaleX(0); } }
+@keyframes carregar-fim { to { opacity: 0; visibility: hidden; } }
+
+/* Abertura do hero */
+.anima .topo { transform: translateY(-100%); }
+.anima.entrou .topo { transform: none; transition: transform .9s var(--ease) .5s, background .3s, border-color .3s; }
+.anima .hero__video { opacity: 0; transform: scale(1.15); }
+.anima.entrou .hero__video { opacity: 1; transform: none; transition: opacity 1.4s ease .2s, transform 2.6s var(--ease); }
+.anima .hero__in > :not(h1) { opacity: 0; transform: translateY(30px); }
+.anima.entrou .hero__in > :not(h1) { opacity: 1; transform: none; transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.anima.entrou .hero .olho { transition-delay: .25s; }
+.anima.entrou .hero__lead { transition-delay: 1s; }
+.anima.entrou .hero .hero__ctas { transition-delay: 1.2s; }
+.palavra { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.palavra > span { display: inline-block; }
+.anima .palavra > span { transform: translateY(110%); }
+.anima.entrou .palavra > span { transform: none; transition: transform 1.1s var(--ease) calc(.4s + var(--i) * 70ms); }
+
+/* Composição das seções na rolagem: .r recebe .visivel ao entrar na tela; --i escalona os irmãos */
+.anima .r { transition: opacity .9s var(--ease), transform .9s var(--ease), clip-path 1.1s var(--ease); transition-delay: calc(var(--i, 0) * var(--passo, 90ms)); }
+.anima .r:not(.visivel) { opacity: 0; }
+.anima .r--sobe:not(.visivel) { transform: translateY(44px); }
+.anima .r--esq:not(.visivel) { transform: translateX(-40px); }
+.anima .r--dir:not(.visivel) { transform: translateX(60px); }
+.anima .r--escala:not(.visivel) { transform: translateY(20px) scale(.9); }
+/* Máscaras ficam num filho: clip-path no próprio alvo impede o IntersectionObserver de vê-lo */
+.anima .r--titulo { overflow: hidden; padding-bottom: .12em; margin-bottom: .38em; }
+.anima .r--titulo .mascara { display: block; transition: transform 1.1s var(--ease) calc(var(--i, 0) * var(--passo, 90ms)); }
+.anima .r--titulo:not(.visivel) .mascara { transform: translateY(105%); }
+.anima .r--cortina:not(.visivel) { opacity: 1; }
+.anima .r--cortina img { clip-path: inset(0); transition: clip-path 1.4s var(--ease); }
+.anima .r--cortina:not(.visivel) img { clip-path: inset(0 100% 0 0); }
+.anima .olho.r::before { transition: width .8s var(--ease) .3s; }
+.anima .olho.r:not(.visivel)::before, .anima .hero .olho::before { width: 0; }
+.anima.entrou .hero .olho::before { width: 28px; transition: width .8s var(--ease) .6s; }
+.anima .dif.r img { transition: transform 1.6s var(--ease) calc(var(--i) * var(--passo)); }
+.anima .dif.r:not(.visivel) img { transform: scale(1.3); }
+.anima .jornada li.r .jornada__n { transition: transform .7s cubic-bezier(.34, 1.56, .64, 1) calc(var(--i) * var(--passo) + .15s); }
+.anima .jornada li.r:not(.visivel) .jornada__n { transform: scale(.3); }
+.anima .jornada li.r::before { transform-origin: left; transition: transform .8s var(--ease) calc(var(--i) * var(--passo) + .35s); }
+.anima .jornada li.r:not(.visivel)::before { transform: scaleX(0); }
+@media (prefers-reduced-motion: reduce) { .progresso { display: none; } }
 
 /* Responsivo */
 @media (max-width: 1080px) {
