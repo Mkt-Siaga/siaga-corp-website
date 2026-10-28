@@ -78,6 +78,21 @@
     a.addEventListener('click', function () { $('fInteresse').value = a.dataset.assunto; });
   });
   $('formNext').value = location.href.split(/[?#]/)[0] + '?enviado=1#contato';
+  // O FormSubmit demora alguns segundos para abrir o reCAPTCHA: sem esse aviso parece que o botão não fez nada
+  form.addEventListener('submit', function () {
+    var enviar = form.querySelector('button[type=submit]');
+    enviar.disabled = true;
+    enviar.innerHTML = 'Enviando…';
+    form.classList.add('enviando');
+  });
+  window.addEventListener('pageshow', function (e) {
+    // Ao voltar do FormSubmit pelo botão "voltar", o navegador restaura a página com o botão ainda travado
+    if (!e.persisted) return;
+    var enviar = form.querySelector('button[type=submit]');
+    enviar.disabled = false;
+    enviar.innerHTML = 'Enviar mensagem <span aria-hidden="true">→</span>';
+    form.classList.remove('enviando');
+  });
   if (/[?&]enviado=1/.test(location.search)) {
     form.hidden = true; $('formOk').hidden = false;
     history.replaceState(null, '', location.pathname + '#contato');

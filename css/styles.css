@@ -188,6 +188,9 @@ a.marca:hover .marca__ir { color: var(--laranja); }
 .aceite input { margin-top: .2em; accent-color: var(--laranja); }
 .form-contato .btn { width: 100%; justify-content: center; margin-top: 20px; cursor: pointer; font-family: inherit; }
 .form-contato__nota { margin: 12px 0 0; font-size: .8rem; text-align: center; }
+.form-contato .btn:disabled { cursor: progress; opacity: .75; }
+.form-contato.enviando .btn { animation: enviando 1.2s ease-in-out infinite; }
+@keyframes enviando { 50% { opacity: .5; } }
 .form-contato__ok p { margin: 0; }
 .pote { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 [hidden] { display: none !important; }
