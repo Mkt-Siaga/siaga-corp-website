@@ -2,8 +2,8 @@
 // Fontes: gruposiaga.com / siagatrading.com (dez/2025) e deck "CORP SIAGA - APRESENTAÇÃO" (Canva).
 window.SIAGA = {
   contato: {
-    telefone: '(11) 5108-3478',
-    telefoneLink: 'tel:+551151083478',
+    telefone: '+55 11 99408-4004',
+    telefoneLink: 'tel:+5511994084004',
     email: 'contato@gruposiaga.com',
     redes: [
       { nome: 'LinkedIn', url: 'https://www.linkedin.com/company/gruposiaga' },
@@ -77,8 +77,7 @@ window.SIAGA = {
     { nome: 'Sixx', oculta: true, logo: 'assets/marcas/sixx.png', linha: 'Química para construção', texto: 'Tintas spray, espuma expansiva, silicones, PU40, adesivo instantâneo e corante líquido, com ficha técnica e FDS de cada produto.', url: 'https://mkt-siaga.github.io/sixx-website/' },
     { nome: 'Nexbridge International', oculta: true, logo: 'assets/marcas/nexbridge.png', linha: 'Casa e utilidades', texto: 'Utilidades de cozinha, eletroportáteis, brinquedos e mais, com catálogo para cotação.', url: 'https://mkt-siaga.github.io/nexbridge-website/' },
     { nome: 'WhiteLabel', logo: 'assets/marcas/whitelabel.png', linha: 'Linha para marca própria', texto: 'Catálogo de materiais de construção pronto para private label: ferramentas, discos, brocas, iluminação, hidráulica e ferragens.', url: 'https://mkt-siaga.github.io/whitelabel-website/' },
-    { nome: 'G8', oculta: true, logo: '', linha: 'Marca do grupo', texto: '', url: '' },
-    { nome: 'Ultra Hidra', logo: '', linha: 'Marca do grupo', texto: '', url: '' }
+    { nome: 'G8', oculta: true, logo: '', linha: 'Marca do grupo', texto: '', url: '' }
   ],
 
   modalidades: {
