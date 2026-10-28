@@ -16,7 +16,7 @@ window.SIAGA = {
     { valor: 300, prefixo: '+', rotulo: 'fornecedores internacionais avaliados e homologados' },
     { valor: 104, prefixo: '+', rotulo: 'empresas atendidas no varejo e no atacarejo' },
     { valor: 730, prefixo: '+', rotulo: 'lotes inspecionados com controle total de qualidade' },
-    { valor: 37, prefixo: '', rotulo: 'países com operações de importação e exportação do Grupo Prexx' }
+    { valor: 37, prefixo: '', rotulo: 'países com operações de importação e exportação, através de parceiros' }
   ],
 
   // Jornada ponta a ponta: da fábrica ao CD do cliente
@@ -83,9 +83,9 @@ window.SIAGA = {
 
   modalidades: {
     importacao: [
-      { nome: 'Encomenda', itens: ['A Prexx fecha o câmbio e o cliente antecipa os valores', 'O cliente não precisa ter filial no estado', 'Nota fiscal de venda da mercadoria para o cliente'] },
-      { nome: 'Conta e ordem', itens: ['O câmbio pode ser fechado pela Prexx ou pelo cliente', 'O cliente precisa ter filial consolidada no estado', 'Nota fiscal de remessa para transferir a mercadoria ao cliente'] },
-      { nome: 'Distribuição', itens: ['A Prexx compra no exterior, importa e nacionaliza', 'O estoque fica em logísticas parceiras', 'Venda pelo nosso comercial e expedição até o cliente'] }
+      { nome: 'Encomenda', itens: ['O câmbio é fechado através de parceiros e o cliente antecipa os valores', 'O cliente não precisa ter filial no estado', 'Nota fiscal de venda da mercadoria para o cliente'] },
+      { nome: 'Conta e ordem', itens: ['O câmbio pode ser fechado através de parceiros ou pelo cliente', 'O cliente precisa ter filial consolidada no estado', 'Nota fiscal de remessa para transferir a mercadoria ao cliente'] },
+      { nome: 'Distribuição', itens: ['Compramos no exterior, importamos e nacionalizamos através de parceiros', 'O estoque fica em logísticas parceiras', 'Venda pelo nosso comercial e expedição até o cliente'] }
     ],
     exportacao: [
       { nome: 'Direta', itens: ['Compramos de fabricantes e produtores brasileiros e comercializamos no mundo', 'Linhas de crédito para o exportador nacional e para o importador global'] },

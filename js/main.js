@@ -169,8 +169,8 @@
     marcar('.escritorio', 'escala', 110);
     marcar('.vantagens li', 'esq', 60);
     marcar('.contatos li', 'dir', 120);
-    marcar('.prexx', 'cortina');
-    marcar('.prexx__card', 'dir', 450);
+    marcar('.grupo-foto', 'cortina');
+    marcar('.grupo-foto__card', 'dir', 450);
     document.querySelectorAll('.contador').forEach(function (el) { el.textContent = '0'; alvos.push(el); });
 
     // Tela de carregamento: sai quando a página carrega (mínimo 1,3 s, máximo 2,8 s), abre o hero e só então começa a observar a rolagem
