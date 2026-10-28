@@ -27,7 +27,7 @@
   }).join('');
   $('listaPerfis').innerHTML = lis(D.perfis);
 
-  $('listaMarcas').innerHTML = D.marcas.map(function (m) {
+  $('listaMarcas').innerHTML = D.marcas.filter(function (m) { return !m.oculta; }).map(function (m) {
     var tag = m.url ? 'a' : 'div';
     var attrs = m.url ? ' href="' + m.url + '" target="_blank" rel="noopener"' : '';
     var logo = m.logo ? '<img src="' + m.logo + '" alt="' + esc(m.nome) + '" loading="lazy">' : '<span class="marca__nome">' + esc(m.nome) + '</span>';

@@ -69,15 +69,15 @@ window.SIAGA = {
     'Indústrias nacionais que querem terceirizar a produção internacional'
   ],
 
-  // logo: arquivo em assets/marcas (sem logo, o card mostra o nome em texto). url vazia = card sem link.
+  // logo: arquivo em assets/marcas (sem logo, o card mostra o nome em texto). url vazia = card sem link. oculta: true tira do site.
   marcas: [
     { nome: 'Siaga Trading', logo: 'assets/marcas/siaga-trading.webp', linha: 'Importação e supply chain', texto: 'Importação door to door para indústrias, atacados e varejo: do sourcing ao desembarque, com inteligência de mercado e visão de sell out.', url: 'https://siagatrading.com/' },
     { nome: 'Durax', logo: 'assets/marcas/durax.png', linha: 'A nova força no MatCon', texto: 'Fixadores, ferramentas, material elétrico e hidráulico com inspeção na fábrica e estoque no Brasil para abastecer a loja e a obra.', url: 'https://dev.duraxbr.com/' },
     { nome: 'Durabem', logo: 'assets/marcas/durabem.svg', linha: 'Feito para durar', texto: 'Mais de 3 mil itens para construção: ferragens, elétrica, ferramentas e linha química. Combina performance e rentabilidade no mix da loja.', url: 'https://mkt-siaga.github.io/durabem-website/' },
-    { nome: 'Sixx', logo: 'assets/marcas/sixx.png', linha: 'Química para construção', texto: 'Tintas spray, espuma expansiva, silicones, PU40, adesivo instantâneo e corante líquido, com ficha técnica e FDS de cada produto.', url: 'https://mkt-siaga.github.io/sixx-website/' },
-    { nome: 'Nexbridge International', logo: 'assets/marcas/nexbridge.png', linha: 'Casa e utilidades', texto: 'Utilidades de cozinha, eletroportáteis, brinquedos e mais, com catálogo para cotação.', url: 'https://mkt-siaga.github.io/nexbridge-website/' },
+    { nome: 'Sixx', oculta: true, logo: 'assets/marcas/sixx.png', linha: 'Química para construção', texto: 'Tintas spray, espuma expansiva, silicones, PU40, adesivo instantâneo e corante líquido, com ficha técnica e FDS de cada produto.', url: 'https://mkt-siaga.github.io/sixx-website/' },
+    { nome: 'Nexbridge International', oculta: true, logo: 'assets/marcas/nexbridge.png', linha: 'Casa e utilidades', texto: 'Utilidades de cozinha, eletroportáteis, brinquedos e mais, com catálogo para cotação.', url: 'https://mkt-siaga.github.io/nexbridge-website/' },
     { nome: 'WhiteLabel', logo: 'assets/marcas/whitelabel.png', linha: 'Linha para marca própria', texto: 'Catálogo de materiais de construção pronto para private label: ferramentas, discos, brocas, iluminação, hidráulica e ferragens.', url: 'https://mkt-siaga.github.io/whitelabel-website/' },
-    { nome: 'G8', logo: '', linha: 'Marca do grupo', texto: '', url: '' },
+    { nome: 'G8', oculta: true, logo: '', linha: 'Marca do grupo', texto: '', url: '' },
     { nome: 'Ultra Hidra', logo: '', linha: 'Marca do grupo', texto: '', url: '' }
   ],
 

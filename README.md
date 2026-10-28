@@ -27,7 +27,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File ..\ferramentas\serve.ps1 -Ro
 
 ## Pendências
 
-- **Marcas:** confirmar a lista final. G8 e Ultra Hidra aparecem só com o nome (faltam logo, texto e site). A Tekends ficou de fora até alguém confirmar.
+- **Marcas:** Sixx, G8 e Nexbridge estão ocultas (`oculta: true` em `js/dados.js`; tire o campo para voltarem). Ultra Hidra aparece só com o nome (faltam logo, texto e site). A Tekends ficou de fora até alguém confirmar.
 - **Link da Durax:** aponta para dev.duraxbr.com, o site novo. Trocar para duraxbr.com quando ele for o principal.
 - **Hong Kong:** falta o endereço do escritório.
 - **Liderança:** só tem as iniciais. Faltam fotos e a autorização para exibir.
