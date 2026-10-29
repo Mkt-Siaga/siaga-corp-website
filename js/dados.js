@@ -112,7 +112,7 @@ window.SIAGA = {
     { pais: 'China', sigla: 'CN', cidade: 'Hangzhou', endereco: 'Fourth Floor, No. 11-1, Hongtai Si Lu, Xiaoshan Economic Development' },
     { pais: 'Índia', sigla: 'IN', cidade: 'Nova Délhi', endereco: '103, First Floor, F.I.E. Patparganj Industrial Area, 110092' },
     { pais: 'Estados Unidos', sigla: 'US', cidade: 'Miami · Siaga Trading LLC', endereco: '150 SE 2nd Ave, Ste 506, Miami, FL 33131' },
-    { pais: 'Hong Kong', sigla: 'HK', cidade: 'Hong Kong', endereco: '' }
+    { pais: 'Hong Kong', sigla: 'HK', cidade: 'Wan Chai', endereco: 'Flat A, 20/F, ZJ 300, 300 Lockhart Road, Wan Chai, Hong Kong' }
   ],
 
   lideranca: [

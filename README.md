@@ -29,7 +29,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File ..\ferramentas\serve.ps1 -Ro
 
 - **Marcas:** Sixx, G8 e Nexbridge estão ocultas (`oculta: true` em `js/dados.js`; tire o campo para voltarem). Ultra Hidra foi removida a pedido. A Tekends ficou de fora até alguém confirmar.
 - **Link da Durax:** aponta para dev.duraxbr.com, o site novo. Trocar para duraxbr.com quando ele for o principal.
-- **Hong Kong:** falta o endereço do escritório.
+- **Hong Kong:** Flat A, 20/F, ZJ 300, 300 Lockhart Road, Wan Chai (informado em 29/10/2026).
 - **Liderança:** só tem as iniciais. Faltam fotos e a autorização para exibir.
 - **Contato:** os botões abrem um e-mail para contato@gruposiaga.com. O site antigo usava formulário do RD Station; dá para embutir de novo, se quiserem.
 - **Números:** +300 fornecedores, +104 empresas e +730 lotes vêm do siagatrading.com. 37 países: operação através de parceiros (não citar o nome do parceiro no site).
