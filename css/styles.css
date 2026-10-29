@@ -9,13 +9,14 @@
   --texto: #f2f2f2;
   --texto-2: #b9b9b9;
   --raio: 14px;
-  --fonte: 'Saira', 'Segoe UI', system-ui, sans-serif;
+  --fonte: 'Saira', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif;
   --larg: 1200px;
   --topo-alt: 76px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: var(--topo-alt); }
+/* overflow-x no html e no body: o do body só corta o próprio body quando o html também tem overflow (senão vai para a janela) */
+html { overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: var(--topo-alt); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body { margin: 0; overflow-x: clip; background: var(--preto); color: var(--texto); font: 400 17px/1.6 var(--fonte); -webkit-font-smoothing: antialiased; }
 img { max-width: 100%; height: auto; display: block; }
@@ -45,6 +46,13 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .menu { display: flex; align-items: center; gap: 28px; font-size: .95rem; }
 .menu a:not(.btn) { text-decoration: none; color: var(--texto-2); transition: color .2s; }
 .menu a:not(.btn):hover { color: var(--laranja); }
+/* Seletor de idioma (js/idiomas.js) */
+.idiomas { display: flex; flex: none; gap: 2px; padding: 3px; border: 1px solid var(--linha); border-radius: 8px; }
+.idiomas button { min-width: 34px; padding: .35em .55em; border: 0; border-radius: 5px; background: none; color: var(--texto-2); font: 600 .78rem var(--fonte); letter-spacing: .06em; cursor: pointer; transition: color .2s, background .2s; }
+.idiomas button:hover { color: var(--texto); }
+.idiomas button[aria-pressed="true"] { background: var(--laranja); color: #111; }
+.sem-carregar .carregando { display: none !important; }
+.idioma-zh .olho { letter-spacing: .1em; }
 .menu-btn { display: none; width: 44px; height: 44px; border: 0; background: none; padding: 10px; cursor: pointer; }
 .menu-btn span { display: block; height: 2px; margin: 5px 0; background: var(--texto); transition: transform .25s, opacity .25s; }
 .menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -287,6 +295,8 @@ a.marca:hover .marca__ir { color: var(--laranja); }
   .menu a:not(.btn) { padding: 14px 0; border-bottom: 1px solid var(--linha); font-size: 1.05rem; }
   .menu .btn { margin-top: 16px; justify-content: center; }
   .menu-btn { display: block; }
+  .idiomas { margin-left: auto; }
+  .topo__in { gap: 12px; }
   .topo { background: rgba(5, 5, 5, .92); }
   .numeros__grid { grid-template-columns: 1fr 1fr; }
   .numero:nth-child(3) { border-left: 0; }

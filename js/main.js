@@ -35,7 +35,7 @@
       '<div class="marca__logo">' + logo + '</div>' +
       '<small>' + esc(m.linha) + '</small>' +
       (m.texto ? '<p>' + esc(m.texto) + '</p>' : '') +
-      (m.url ? '<span class="marca__ir">Visitar site <span aria-hidden="true">↗</span></span>' : '') +
+      (m.url ? '<span class="marca__ir">' + T('visitar') + ' <span aria-hidden="true">↗</span></span>' : '') +
       '</' + tag + '>';
   }).join('');
 
@@ -74,8 +74,8 @@
 
   // Formulário de contato: os botões do hero já escolhem o assunto
   var form = $('formContato'), enviar = form.querySelector('button[type=submit]'), rotuloEnviar = enviar.innerHTML;
-  document.querySelectorAll('.hero [data-assunto]').forEach(function (a) {
-    a.addEventListener('click', function () { $('fInteresse').value = a.dataset.assunto; });
+  document.querySelectorAll('.hero [data-opcao]').forEach(function (a) {
+    a.addEventListener('click', function () { $('fInteresse').selectedIndex = +a.dataset.opcao; });
   });
 
   // Verificação anti-robô: uma conta simples, sorteada a cada carregamento
@@ -89,7 +89,7 @@
 
   function travar(sim) {
     enviar.disabled = sim;
-    enviar.innerHTML = sim ? 'Enviando…' : rotuloEnviar;
+    enviar.innerHTML = sim ? T('enviando') : rotuloEnviar;
     form.classList.toggle('enviando', sim);
   }
   function erro(texto) {
@@ -101,7 +101,7 @@
     // Mostra a confirmação e volta para o início sozinho; o formulário fica pronto para outro envio
     var s = 8;
     (function contar() {
-      $('formConta').textContent = 'Voltando ao início em ' + s + ' s';
+      $('formConta').textContent = T('voltando').replace('{s}', s);
       if (s-- > 0) volta = setTimeout(contar, 1000); else voltar();
     })();
   }
@@ -115,7 +115,7 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     $('formErro').hidden = true;
-    $('fConta').setCustomValidity(+$('fConta').value.trim() === soma ? '' : 'Resposta incorreta. Confira a conta.');
+    $('fConta').setCustomValidity(+$('fConta').value.trim() === soma ? '' : T('contaErrada'));
     if (!form.checkValidity()) { form.reportValidity(); return; }
     if (form._honey.value) { sucesso(); return; } // robô preencheu o campo-isca: finge que enviou
     travar(true);
@@ -139,7 +139,7 @@
       })
       .catch(function () {
         clearTimeout(limite);
-        erro('Não foi possível enviar agora. Tente de novo em instantes ou fale com a gente: <a href="mailto:' + C.email + '">' + C.email + '</a> · <a href="' + C.telefoneLink + '">' + esc(C.telefone) + '</a>');
+        erro(T('erroEnvio') + ' <a href="mailto:' + C.email + '">' + C.email + '</a> · <a href="' + C.telefoneLink + '">' + esc(C.telefone) + '</a>');
       });
   });
   $('redes').innerHTML = C.redes.map(function (r) { return '<a href="' + r.url + '" target="_blank" rel="noopener">' + esc(r.nome) + '</a>'; }).join('');
@@ -189,11 +189,12 @@
     requestAnimationFrame(passo);
   }
   if (anima && 'IntersectionObserver' in window) {
-    // Título do hero sobe palavra por palavra
-    var h1 = document.querySelector('.hero h1');
-    h1.innerHTML = h1.innerHTML.trim().split(/\s+/).map(function (p, i) {
-      return '<span class="palavra"><span style="--i:' + i + '">' + p + '</span></span>';
-    }).join(' ');
+    // Título do hero sobe palavra por palavra (em chinês, que não separa palavras com espaço, caractere por caractere)
+    var h1 = document.querySelector('.hero h1'), chines = window.IDIOMA === 'zh';
+    var partes = chines ? h1.innerHTML.trim().match(/<em>.*?<\/em>|[^<]/g) : h1.innerHTML.trim().split(/\s+/);
+    h1.innerHTML = partes.map(function (p, i) {
+      return '<span class="palavra"><span style="--i:' + (chines ? i * 0.5 : i) + '">' + p + '</span></span>';
+    }).join(chines ? '' : ' ');
 
     var alvos = [];
     var obs = new IntersectionObserver(function (entradas) {
@@ -251,7 +252,9 @@
       if (tela) setTimeout(function () { tela.remove(); }, 1200);
       setTimeout(function () { alvos.forEach(function (el) { obs.observe(el); }); }, 700);
     }
-    var pronto = function () { setTimeout(entrar, Math.max(0, 1300 - performance.now())); };
+    // Na troca de idioma a página recarrega: aí a tela de carregamento não precisa durar o mínimo de novo
+    var minimo = raiz.classList.contains('sem-carregar') ? 0 : 1300;
+    var pronto = function () { setTimeout(entrar, Math.max(0, minimo - performance.now())); };
     if (document.readyState === 'complete') pronto(); else window.addEventListener('load', pronto);
     setTimeout(entrar, 2800);
   } else {

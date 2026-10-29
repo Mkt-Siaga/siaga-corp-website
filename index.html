@@ -11,7 +11,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
-<script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('anima');</script>
+<script>
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('anima');
+  // Recarga por troca de idioma (js/idiomas.js): pula a tela de carregamento
+  try { if (sessionStorage.getItem('trocaIdioma')) { sessionStorage.removeItem('trocaIdioma'); document.documentElement.classList.add('sem-carregar'); } } catch (e) {}
+</script>
 </head>
 <body>
 
@@ -23,13 +27,16 @@
   <div class="topo__in">
     <a href="#inicio" class="topo__logo" aria-label="Grupo Siaga, início"><img src="assets/marcas/siaga-corp-logo.svg" alt="Siaga Corp" width="200" height="68"></a>
     <nav class="menu" id="menu" aria-label="Principal">
-      <a href="#grupo">O grupo</a>
-      <a href="#jornada">Como atuamos</a>
-      <a href="#servicos">Serviços</a>
-      <a href="#marcas">Marcas</a>
-      <a href="#presenca">Presença global</a>
-      <a href="#contato" class="btn btn--sm">Fale conosco</a>
+      <a href="#grupo" data-t="nav.grupo">O grupo</a>
+      <a href="#jornada" data-t="nav.jornada">Como atuamos</a>
+      <a href="#servicos" data-t="nav.servicos">Serviços</a>
+      <a href="#marcas" data-t="nav.marcas">Marcas</a>
+      <a href="#presenca" data-t="nav.presenca">Presença global</a>
+      <a href="#contato" class="btn btn--sm" data-t="nav.contato">Fale conosco</a>
     </nav>
+    <div class="idiomas" role="group" aria-label="Idioma / Language / 语言">
+      <button type="button" data-lang="pt" lang="pt-BR">PT</button><button type="button" data-lang="en" lang="en">EN</button><button type="button" data-lang="zh" lang="zh-CN">中文</button>
+    </div>
     <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -42,12 +49,12 @@
   </video>
   <div class="hero__veu"></div>
   <div class="wrap hero__in">
-    <p class="olho">Soluções que transformam</p>
-    <h1>Supply chain inteligente para o setor de <em>construção</em></h1>
-    <p class="hero__lead">O Grupo Siaga conecta sua empresa aos melhores fabricantes internacionais e gerencia toda a cadeia de suprimentos, do desenvolvimento ao desembarque, com segurança, previsibilidade e alta competitividade.</p>
+    <p class="olho" data-t="hero.olho">Soluções que transformam</p>
+    <h1 data-t="hero.h1">Supply chain inteligente para o setor de <em>construção</em></h1>
+    <p class="hero__lead" data-t="hero.lead">O Grupo Siaga conecta sua empresa aos melhores fabricantes internacionais e gerencia toda a cadeia de suprimentos, do desenvolvimento ao desembarque, com segurança, previsibilidade e alta competitividade.</p>
     <div class="hero__ctas">
-      <a class="btn" href="#contato" data-assunto="Quero desenvolver marca própria">Quero desenvolver marca própria <span aria-hidden="true">→</span></a>
-      <a class="btn btn--linha" href="#contato" data-assunto="Quero importar com minha marca">Quero importar com minha marca <span aria-hidden="true">→</span></a>
+      <a class="btn" href="#contato" data-opcao="0" data-t="hero.cta1">Quero desenvolver marca própria <span aria-hidden="true">→</span></a>
+      <a class="btn btn--linha" href="#contato" data-opcao="1" data-t="hero.cta2">Quero importar com minha marca <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -59,23 +66,23 @@
 <section class="secao" id="grupo">
   <div class="wrap duas">
     <div>
-      <p class="olho">O grupo</p>
-      <h2>Conectamos o Brasil aos melhores fabricantes do mundo</h2>
-      <p>O Grupo Siaga nasceu para elevar a competitividade do mercado de construção com uma operação global sólida, segura e orientada a resultados.</p>
-      <p>Com presença estratégica na Ásia e no Brasil, nosso time combina comércio exterior, sourcing, engenharia de produtos e supply chain, entregando soluções completas para empresas que querem expandir, inovar e conquistar mercado.</p>
+      <p class="olho" data-t="grupo.olho">O grupo</p>
+      <h2 data-t="grupo.h2">Conectamos o Brasil aos melhores fabricantes do mundo</h2>
+      <p data-t="grupo.p1">O Grupo Siaga nasceu para elevar a competitividade do mercado de construção com uma operação global sólida, segura e orientada a resultados.</p>
+      <p data-t="grupo.p2">Com presença estratégica na Ásia e no Brasil, nosso time combina comércio exterior, sourcing, engenharia de produtos e supply chain, entregando soluções completas para empresas que querem expandir, inovar e conquistar mercado.</p>
       <ul class="checks">
-        <li>Especialistas em MatCon</li>
-        <li>Rede global de fornecedores homologados</li>
-        <li>Processos rígidos de auditoria e inspeção</li>
-        <li>Importação segura, transparente e previsível</li>
-        <li>Operação logística integrada, ponta a ponta</li>
+        <li data-t="grupo.c1">Especialistas em MatCon</li>
+        <li data-t="grupo.c2">Rede global de fornecedores homologados</li>
+        <li data-t="grupo.c3">Processos rígidos de auditoria e inspeção</li>
+        <li data-t="grupo.c4">Importação segura, transparente e previsível</li>
+        <li data-t="grupo.c5">Operação logística integrada, ponta a ponta</li>
       </ul>
     </div>
     <div class="grupo-foto">
       <img src="assets/img/solucoes-criadas.webp" alt="" loading="lazy" width="637" height="740">
       <div class="grupo-foto__card">
-        <strong>Operação global</strong>
-        <p>Importação e exportação em 37 países, através de parceiros, com toda a cadeia do comércio internacional coberta de ponta a ponta.</p>
+        <strong data-t="grupo.cardT">Operação global</strong>
+        <p data-t="grupo.cardP">Importação e exportação em 37 países, através de parceiros, com toda a cadeia do comércio internacional coberta de ponta a ponta.</p>
       </div>
     </div>
   </div>
@@ -84,9 +91,9 @@
 <section class="secao secao--escura" id="jornada">
   <div class="wrap">
     <div class="cabeca">
-      <p class="olho">Como atuamos</p>
-      <h2>Gestão completa da cadeia de suprimentos, da fábrica ao seu CD</h2>
-      <p>Assumimos cada etapa para que você tenha custos competitivos, qualidade garantida e um portfólio que vende mais.</p>
+      <p class="olho" data-t="jor.olho">Como atuamos</p>
+      <h2 data-t="jor.h2">Gestão completa da cadeia de suprimentos, da fábrica ao seu CD</h2>
+      <p data-t="jor.p">Assumimos cada etapa para que você tenha custos competitivos, qualidade garantida e um portfólio que vende mais.</p>
     </div>
     <ol class="jornada" id="listaJornada"></ol>
   </div>
@@ -95,9 +102,9 @@
 <section class="secao" id="servicos">
   <div class="wrap">
     <div class="cabeca">
-      <p class="olho">Serviços</p>
-      <h2>Um hub de soluções em seis frentes</h2>
-      <p>Da estratégia à entrega: tudo o que a sua importação precisa, num só parceiro.</p>
+      <p class="olho" data-t="serv.olho">Serviços</p>
+      <h2 data-t="serv.h2">Um hub de soluções em seis frentes</h2>
+      <p data-t="serv.p">Da estratégia à entrega: tudo o que a sua importação precisa, num só parceiro.</p>
     </div>
     <div class="pilares" id="listaPilares"></div>
   </div>
@@ -106,8 +113,8 @@
 <section class="secao secao--escura" id="diferenciais">
   <div class="wrap">
     <div class="cabeca">
-      <p class="olho">Por que o Grupo Siaga</p>
-      <h2>Seus produtos com mais margem, qualidade e previsibilidade</h2>
+      <p class="olho" data-t="dif.olho">Por que o Grupo Siaga</p>
+      <h2 data-t="dif.h2">Seus produtos com mais margem, qualidade e previsibilidade</h2>
     </div>
     <div class="difs" id="listaDiferenciais"></div>
   </div>
@@ -116,10 +123,10 @@
 <section class="secao" id="categorias">
   <div class="wrap duas duas--topo">
     <div>
-      <p class="olho">Categorias</p>
-      <h2>Especialistas nas categorias estratégicas do MatCon</h2>
-      <p>Trabalhamos só com fornecedores homologados e com linhas adequadas às exigências do mercado brasileiro.</p>
-      <h3 class="mini">Para quem</h3>
+      <p class="olho" data-t="cat.olho">Categorias</p>
+      <h2 data-t="cat.h2">Especialistas nas categorias estratégicas do MatCon</h2>
+      <p data-t="cat.p">Trabalhamos só com fornecedores homologados e com linhas adequadas às exigências do mercado brasileiro.</p>
+      <h3 class="mini" data-t="cat.mini">Para quem</h3>
       <ul class="checks" id="listaPerfis"></ul>
     </div>
     <ul class="cats" id="listaCategorias"></ul>
@@ -129,9 +136,9 @@
 <section class="secao secao--escura" id="marcas">
   <div class="wrap">
     <div class="cabeca">
-      <p class="olho">Nossas marcas</p>
-      <h2>Um ecossistema de marcas para a loja e para a obra</h2>
-      <p>Marcas próprias desenvolvidas com a mesma cadeia de sourcing, qualidade e logística que oferecemos aos nossos clientes.</p>
+      <p class="olho" data-t="mar.olho">Nossas marcas</p>
+      <h2 data-t="mar.h2">Um ecossistema de marcas para a loja e para a obra</h2>
+      <p data-t="mar.p">Marcas próprias desenvolvidas com a mesma cadeia de sourcing, qualidade e logística que oferecemos aos nossos clientes.</p>
     </div>
     <div class="marcas" id="listaMarcas"></div>
   </div>
@@ -140,23 +147,23 @@
 <section class="secao" id="modalidades">
   <div class="wrap">
     <div class="cabeca">
-      <p class="olho">Modalidades</p>
-      <h2>O modelo de operação certo para o seu negócio</h2>
+      <p class="olho" data-t="mod.olho">Modalidades</p>
+      <h2 data-t="mod.h2">O modelo de operação certo para o seu negócio</h2>
     </div>
     <div class="abas" role="tablist" aria-label="Tipo de operação">
-      <button role="tab" aria-selected="true" aria-controls="painelImp" id="abaImp" data-aba="importacao">Importação</button>
-      <button role="tab" aria-selected="false" aria-controls="painelImp" id="abaExp" data-aba="exportacao">Exportação</button>
+      <button role="tab" aria-selected="true" aria-controls="painelImp" id="abaImp" data-aba="importacao" data-t="mod.imp">Importação</button>
+      <button role="tab" aria-selected="false" aria-controls="painelImp" id="abaExp" data-aba="exportacao" data-t="mod.exp">Exportação</button>
     </div>
     <div class="modos" id="painelImp" role="tabpanel" aria-labelledby="abaImp"></div>
 
     <div class="duas duas--topo modos__extra">
       <div class="icms">
-        <h3>Benefício fiscal de ICMS</h3>
-        <p>Operamos com incentivo fiscal em quatro estados:</p>
+        <h3 data-t="mod.icmsT">Benefício fiscal de ICMS</h3>
+        <p data-t="mod.icmsP">Operamos com incentivo fiscal em quatro estados:</p>
         <ul class="tags" id="listaIcms"></ul>
       </div>
       <div>
-        <h3>Vantagens em operar conosco</h3>
+        <h3 data-t="mod.vantT">Vantagens em operar conosco</h3>
         <ol class="vantagens" id="listaVantagens"></ol>
       </div>
     </div>
@@ -166,9 +173,9 @@
 <section class="secao secao--mapa" id="presenca">
   <div class="wrap">
     <div class="cabeca">
-      <p class="olho">Presença global</p>
-      <h2>Operação ativa no Brasil, na Ásia e nos EUA</h2>
-      <p>Times locais de sourcing e supply chain acompanham fábricas, produção e embarques de perto.</p>
+      <p class="olho" data-t="pres.olho">Presença global</p>
+      <h2 data-t="pres.h2">Operação ativa no Brasil, na Ásia e nos EUA</h2>
+      <p data-t="pres.p">Times locais de sourcing e supply chain acompanham fábricas, produção e embarques de perto.</p>
     </div>
     <div class="escritorios" id="listaEscritorios"></div>
   </div>
@@ -177,8 +184,8 @@
 <section class="secao" id="lideranca">
   <div class="wrap">
     <div class="cabeca">
-      <p class="olho">Liderança</p>
-      <h2>Experiência de quem conhece a construção e a Ásia</h2>
+      <p class="olho" data-t="lid.olho">Liderança</p>
+      <h2 data-t="lid.h2">Experiência de quem conhece a construção e a Ásia</h2>
     </div>
     <div class="lideres" id="listaLideranca"></div>
   </div>
@@ -187,13 +194,13 @@
 <section class="cta" id="contato">
   <div class="wrap cta__in">
     <div>
-      <p class="olho">Contato</p>
-      <h2>Pronto para elevar o nível do seu portfólio?</h2>
-      <p>Fale com nossos especialistas e descubra como importar com segurança, reduzir custos e desenvolver produtos com alta competitividade.</p>
+      <p class="olho" data-t="cont.olho">Contato</p>
+      <h2 data-t="cont.h2">Pronto para elevar o nível do seu portfólio?</h2>
+      <p data-t="cont.p">Fale com nossos especialistas e descubra como importar com segurança, reduzir custos e desenvolver produtos com alta competitividade.</p>
       <ul class="contatos">
-        <li><img src="assets/icones/icn-telefone.svg" alt="" width="24" height="24"><span><small>Telefone</small><a id="telefone" href="#"></a></span></li>
-        <li><img src="assets/icones/icn-mail.svg" alt="" width="24" height="24"><span><small>E-mail</small><a id="email" href="#"></a></span></li>
-        <li><img src="assets/icones/icn-localizacao.svg" alt="" width="24" height="24"><span><small>Sede</small>R. Surubim, 577, Conj. 121, Brooklin, São Paulo/SP</span></li>
+        <li><img src="assets/icones/icn-telefone.svg" alt="" width="24" height="24"><span><small data-t="cont.tel">Telefone</small><a id="telefone" href="#"></a></span></li>
+        <li><img src="assets/icones/icn-mail.svg" alt="" width="24" height="24"><span><small data-t="cont.email">E-mail</small><a id="email" href="#"></a></span></li>
+        <li><img src="assets/icones/icn-localizacao.svg" alt="" width="24" height="24"><span><small data-t="cont.sede">Sede</small><span data-t="cont.sedeTxt">R. Surubim, 577, Conj. 121, Brooklin, São Paulo/SP</span></span></li>
       </ul>
     </div>
 
@@ -202,42 +209,43 @@
          Se operacoes@ trocar, o FormSubmit pede nova ativação: clicar em "Activate Form" no e-mail que ele manda. -->
     <div class="form-contato">
       <form id="formContato" action="https://formsubmit.co/operacoes@gruposiaga.com" method="POST" novalidate>
-        <h3>Envie sua mensagem</h3>
+        <h3 data-t="f.h3">Envie sua mensagem</h3>
         <input type="hidden" name="_subject" value="Contato pelo site · Siaga Corp">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="Idioma" id="fIdioma" value="Português">
         <input type="text" name="_honey" class="pote" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-        <div class="campo"><label for="fInteresse">Assunto</label>
+        <div class="campo"><label for="fInteresse" data-t="f.assunto">Assunto</label>
           <select id="fInteresse" name="Assunto">
-            <option>Quero desenvolver marca própria</option>
-            <option>Quero importar com minha marca</option>
-            <option>Quero conhecer as marcas do grupo</option>
-            <option>Outro assunto</option>
+            <option data-t="f.op1">Quero desenvolver marca própria</option>
+            <option data-t="f.op2">Quero importar com minha marca</option>
+            <option data-t="f.op3">Quero conhecer as marcas do grupo</option>
+            <option data-t="f.op4">Outro assunto</option>
           </select>
         </div>
         <div class="duplo">
-          <div class="campo"><label for="fNome">Nome</label><input id="fNome" name="Nome" autocomplete="name" required></div>
-          <div class="campo"><label for="fEmpresa">Empresa</label><input id="fEmpresa" name="Empresa" autocomplete="organization" required></div>
+          <div class="campo"><label for="fNome" data-t="f.nome">Nome</label><input id="fNome" name="Nome" autocomplete="name" required></div>
+          <div class="campo"><label for="fEmpresa" data-t="f.empresa">Empresa</label><input id="fEmpresa" name="Empresa" autocomplete="organization" required></div>
         </div>
         <div class="duplo">
-          <div class="campo"><label for="fEmail">E-mail</label><input id="fEmail" name="email" type="email" autocomplete="email" required></div>
-          <div class="campo"><label for="fFone">Telefone / WhatsApp</label><input id="fFone" name="Telefone" type="tel" autocomplete="tel"></div>
+          <div class="campo"><label for="fEmail" data-t="f.email">E-mail</label><input id="fEmail" name="email" type="email" autocomplete="email" required></div>
+          <div class="campo"><label for="fFone" data-t="f.fone">Telefone / WhatsApp</label><input id="fFone" name="Telefone" type="tel" autocomplete="tel"></div>
         </div>
-        <div class="campo"><label for="fMsg">Mensagem</label><textarea id="fMsg" name="Mensagem" rows="4" required></textarea></div>
+        <div class="campo"><label for="fMsg" data-t="f.msg">Mensagem</label><textarea id="fMsg" name="Mensagem" rows="4" required></textarea></div>
         <div class="verifica">
           <span class="verifica__icone" aria-hidden="true">✓</span>
-          <label for="fConta">Verificação: quanto é <b id="contaTxt">2 + 3</b>?</label>
+          <label for="fConta" data-t="f.verifica">Verificação: quanto é <b id="contaTxt">2 + 3</b>?</label>
           <input id="fConta" inputmode="numeric" autocomplete="off" maxlength="3" required>
         </div>
-        <label class="aceite"><input type="checkbox" name="Aceite" value="Sim" required> Autorizo o Grupo Siaga a entrar em contato sobre esta solicitação.</label>
-        <button class="btn" type="submit">Enviar mensagem <span aria-hidden="true">→</span></button>
+        <label class="aceite"><input type="checkbox" name="Aceite" value="Sim" required> <span data-t="f.aceite">Autorizo o Grupo Siaga a entrar em contato sobre esta solicitação.</span></label>
+        <button class="btn" type="submit" data-t="f.enviar">Enviar mensagem <span aria-hidden="true">→</span></button>
         <p class="form-contato__erro" id="formErro" role="alert" hidden></p>
       </form>
       <div class="form-contato__ok" id="formOk" role="status" tabindex="-1" hidden>
         <span class="form-contato__selo" aria-hidden="true"></span>
-        <h3>Mensagem enviada</h3>
-        <p>Obrigado pelo contato. Nossa equipe responde em breve pelo e-mail ou telefone informado.</p>
-        <a class="btn btn--linha" href="#inicio" id="formVoltar">Voltar ao início</a>
+        <h3 data-t="f.okT">Mensagem enviada</h3>
+        <p data-t="f.okP">Obrigado pelo contato. Nossa equipe responde em breve pelo e-mail ou telefone informado.</p>
+        <a class="btn btn--linha" href="#inicio" id="formVoltar" data-t="f.voltar">Voltar ao início</a>
         <small id="formConta"></small>
       </div>
     </div>
@@ -250,11 +258,12 @@
   <div class="wrap rodape__in">
     <img src="assets/marcas/siaga-corp-logo.svg" alt="Siaga Corp" width="160" height="54">
     <nav class="rodape__redes" id="redes" aria-label="Redes sociais"></nav>
-    <p>© <span id="ano"></span> Grupo Siaga · Siaga Trading.</p>
+    <p data-t="rod.copy">© <span id="ano"></span> Grupo Siaga · Siaga Trading.</p>
   </div>
 </footer>
 
 <script src="js/dados.js"></script>
+<script src="js/idiomas.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
